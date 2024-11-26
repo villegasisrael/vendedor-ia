@@ -3,3 +3,6 @@ transformers
 datasets
 accelerate
 torch
+pandas
+fuzzywuzzy[speedup]
+openpyxl
