@@ -1,0 +1,27 @@
+{
+    "producto": {
+      "responses": [
+        "Claro, ¿te interesa el {producto}?",
+        "El precio del {producto} es de $X. ¿Te gustaría más información?",
+        "¿Necesitas saber más sobre {producto}?"
+      ],
+      "keywords": ["precio", "costo", "cuánto", "tienen", "disponible"]
+    },
+    "soporte": {
+      "responses": [
+        "Entendido. Por favor, cuéntame más detalles del problema con tu {producto}.",
+        "¿Puedes describir mejor el problema con el {producto}?",
+        "Estoy aquí para ayudarte con tu {producto}. ¿Qué sucede?"
+      ],
+      "keywords": ["no funciona", "falló", "ruido", "problema", "apaga"]
+    },
+    "otros": {
+      "responses": [
+        "No estoy seguro de entender tu solicitud. Por favor, dime si necesitas información sobre un producto o soporte técnico.",
+        "¿Podrías explicarme un poco más? Estoy aquí para ayudarte.",
+        "No tengo información sobre eso, pero dime cómo puedo asistirte."
+      ],
+      "keywords": ["hola", "buenas", "tal", "envían", "ubicados", "métodos"]
+    }
+  }
+  
