@@ -18,6 +18,8 @@
   {"text": "¿Cuánto cuesta la cafetera que aparece en su página?", "label": 1},
   {"text": "¿Está disponible la nevera de 10 pies?", "label": 1},
   {"text": "Mi licuadora no funciona", "label": 2},
+  {"text": "Mi licuadora no sirve", "label": 2},
+  {"text": "mi licuadora no sirbe", "label": 2},
   {"text": "El producto no enciende", "label": 2},
   {"text": "Compré una licuadora y no sirve", "label": 2},
   {"text": "La licuadora se apagó sola, ¿qué hago?", "label": 2},

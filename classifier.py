@@ -1,14 +1,20 @@
-from transformers import pipeline
+from transformers import pipeline, AutoTokenizer, AutoModelForSequenceClassification
+import torch
 
-# Cargar modelo ajustado
-classifier = pipeline(
-    "text-classification",
-    model="./modelo_clasificado",
-    tokenizer="./modelo_clasificado",
-    device=0  # Usar GPU si está disponible
-)
+# Configurar dispositivo (GPU o CPU)
+device = 0 if torch.cuda.is_available() else -1
 
-# Mapeo de etiquetas (debe coincidir con las categorías del dataset)
+# Ruta al modelo entrenado
+model_name = "./modelo_clasificado"
+
+# Inicializar el modelo y el tokenizador desde el modelo entrenado
+tokenizer = AutoTokenizer.from_pretrained(model_name)
+model = AutoModelForSequenceClassification.from_pretrained(model_name)
+
+# Crear el pipeline de clasificación
+classifier = pipeline("text-classification", model=model, tokenizer=tokenizer, device=device)
+
+# Mapeo de etiquetas del modelo a categorías entendibles
 label_mapping = {
     "LABEL_0": "otros",
     "LABEL_1": "producto",
@@ -16,13 +22,18 @@ label_mapping = {
 }
 
 def classify_message(message):
-    """Clasificar un mensaje"""
+    """
+    Clasifica un mensaje basado en las categorías del modelo entrenado.
+    :param message: str - El mensaje de entrada a clasificar.
+    :return: str - Categoría clasificada ('otros', 'producto', 'soporte').
+    """
+    # Clasificar el mensaje con el modelo
     result = classifier(message)
-    print(f"Mensaje: {message}")
-    print("Resultado de clasificación:", result)  # Para verificar la etiqueta y la confianza
-    if result[0]["score"] > 0.4:
-        label = result[0]["label"]
-        return label_mapping.get(label, "otros")
-    else:
-        return "otros"
+    print(f"Resultado de clasificación: {result}")  # Para depuración
 
+    # Asegurar que la confianza sea suficiente
+    if result[0]["score"] > 0.6:  # Ajusta este umbral según sea necesario
+        return label_mapping.get(result[0]["label"], "otros")
+    
+    # Si la confianza no es suficiente, asignar 'otros'
+    return "otros"
